@@ -1,9 +1,12 @@
 {
   program = "nix-server";
-  domain = "localhost";
-  port = 12345;
-  email = "email@email.com";
   modules = {
     river.http = true;
+    river.server = {
+      enable = true;
+      domain = "localhost";
+      port = 12345;
+      email = "teste@teste.com";
+    };
   };
 }
