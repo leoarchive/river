@@ -5,5 +5,5 @@
   email = "email@email.com";
   modules = {
     river.http = true;
-  }
+  };
 }
