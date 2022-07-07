@@ -6,7 +6,7 @@ with builtins;
 #   (elemAt (import (elemAt main.apps 0)) 0).path
 
 let 
-  getRequest = import ./http/request.nix;
+  request = import ./http/request.nix;
   file = fetchurl "https://nixos.wiki/wiki/Nix_by_example";
 in
-  getRequest
+  (request "GET /articles?include=author HTTP/1.1")

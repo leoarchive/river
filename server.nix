@@ -1,11 +1,11 @@
 let 
-  configuration = import ./configuration.nix;
+  package = import ./package.nix;
 in
 {
   security.acme.acceptTerms = true;
   security.acme.certs = {
-    ${toString configuration.Domain} = {
-      email = configuration.Email;
+    ${toString package.domain} = {
+      email = package.email;
     };
   };
 
@@ -19,11 +19,11 @@ in
     recommendedTlsSettings = true;
 
     virtualHosts = {
-      ${toString configuration.Domain} = {
+      ${toString package.domain} = {
         addSSL = true;
         enableACME = true;
-        locations."/" = { root = "/var/www/${configuration.Program}/"; };
-        listen = [{ port = configuration.Port; addr="0.0.0.0"; ssl=true; }];
+        locations."/" = { root = "/var/www/${package.program}/"; };
+        listen = [{ port = package.port; addr="0.0.0.0"; ssl=true; }];
       };
     };
   };
