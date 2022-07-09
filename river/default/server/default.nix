@@ -7,7 +7,7 @@
 with import <nixpkgs> {};
 
 let
-  package = import ../../../package.nix;
+  package = lib.importJSON ../../../riverconfig.json;
   script = pkgs.writeShellScriptBin "river.server" 
   ''
     start() {
@@ -31,8 +31,7 @@ let
     "$@"
   '';
 in
-  if package.modules.river.server.enable == true
-  then 
+  if package.modules.riverServer then 
     stdenv.mkDerivation {
       name = "nix-server-environment";
       

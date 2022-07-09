@@ -3,6 +3,7 @@ with import <nixpkgs> {};
 with builtins;
 
 let
+  package = lib.importJSON ../../../../riverconfig.json;
   chars   = request: pkgs.lib.strings.stringToCharacters request;
 
   method  = chars: index:
@@ -46,4 +47,6 @@ let
     params  = params (chars req) (stringLength (path (chars req) (stringLength (method (chars req) 0) + 1)) + (stringLength (method (chars req) 0) + 1) + 1); 
   };
 in
-  url
+  if package.modules.riverHttp then
+    url
+  else "river.http is not enable"

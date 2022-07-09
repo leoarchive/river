@@ -9,7 +9,7 @@
 #   imports = [ <output> ];
 #
 let 
-  package = import ../../../package.nix;
+  package = lib.importJSON ../../../riverconfig.json;
 in
 {
   security.acme.acceptTerms = true;
