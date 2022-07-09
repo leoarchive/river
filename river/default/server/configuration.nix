@@ -9,13 +9,13 @@
 #   imports = [ <output> ];
 #
 let 
-  package = lib.importJSON ../../../riverconfig.json;
+  riverconfig = import ../../../riverconfig.nix;
 in
 {
   security.acme.acceptTerms = true;
   security.acme.certs = {
-    ${toString package.modules.river.server.domain} = {
-      email = package.modules.river.server.email;
+    ${toString riverconfig.modules.river.server.domain} = {
+      email = riverconfig.modules.river.server.email;
     };
   };
 
@@ -29,11 +29,11 @@ in
     recommendedTlsSettings = true;
 
     virtualHosts = {
-      ${toString package.modules.river.server.domain} = {
+      ${toString riverconfig.modules.river.server.domain} = {
         addSSL = true;
         enableACME = true;
-        locations."/" = { root = "/var/www/${package.program}/"; };
-        listen = [{ port = package.modules.river.server.port; addr="0.0.0.0"; ssl=true; }];
+        locations."/" = { root = "/var/www/${riverconfig.program}/"; };
+        listen = [{ port = riverconfig.modules.river.server.port; addr="0.0.0.0"; ssl=true; }];
       };
     };
   };
