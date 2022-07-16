@@ -2,14 +2,14 @@
 # for start you need to import this directory in your configuration.nix;
 # you can get the directory with:
 #
-#   echo $PWD/river/default/server/configuration.nix
+#   echo $PWD/river/default/http/server/configuration.nix
 #
 # and in your configuration.nix:
 #
 #   imports = [ <output> ];
 #
 let 
-  riverconfig = import ../../../riverconfig.nix;
+  riverconfig = import ../../../../riverconfig.nix;
 in
 {
   security.acme.acceptTerms = true;

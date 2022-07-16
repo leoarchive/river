@@ -2,12 +2,12 @@
 # read more in the file ./configuration.nix;
 # afer import you can start with the command:
 #
-#   nix-shell river/default/server
+#   nix-shell river/default/http/server/shell.nix
 #
 with import <nixpkgs> {};
 
 let
-  riverconfig = import ../../../riverconfig.nix;
+  riverconfig = import ../../../../riverconfig.nix;
   script = pkgs.writeShellScriptBin "river.server" 
   ''
     start() {
@@ -31,7 +31,7 @@ let
     "$@"
   '';
 in
-  if riverconfig.modules.river.server then 
+  if riverconfig.modules.river.http.server != null then 
     stdenv.mkDerivation {
       name = "nix-server-environment";
       
